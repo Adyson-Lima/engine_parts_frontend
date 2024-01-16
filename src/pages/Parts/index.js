@@ -13,6 +13,15 @@ export default function Parts(){
     .then(response => {setParts(response.data)})
   },[]);
 
+  // update, atualiza um registro na api
+  async function updatePart(id){
+    try {
+      navigate(`/newupdate/${id}`);      
+    } catch (error) {
+      alert("erro ao navegar para Newupdate");      
+    }
+  }
+
   return(
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
       <div className="card-header bg-primary" style={{color: '#fff'}}>
@@ -41,7 +50,8 @@ export default function Parts(){
                   <td>
 
                     <button data-testid="mybtn1" type="button"
-                    className="btn btn-outline-info">Editar</button>
+                    className="btn btn-outline-info" style={{margin: '2px'}}
+                    onClick={() => updatePart(part.id)}>Editar</button>
 
                     <button data-testid="mybtn2" type="button"
                     className="btn btn-outline-danger">Excluir</button>
