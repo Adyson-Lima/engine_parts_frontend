@@ -13,12 +13,22 @@ export default function Parts(){
     .then(response => {setParts(response.data)})
   },[]);
 
-  // update, atualiza um registro na api
+  // update, navega para NewUpdate
   async function updatePart(id){
     try {
       navigate(`/newupdate/${id}`);      
     } catch (error) {
-      alert("erro ao navegar para Newupdate");      
+      alert("Erro ao navegar para Newupdate");      
+    }
+  }
+
+  // delete, exclui um registro
+  async function deletePart(id){
+    try {
+      await api.delete(`api/v1/parts/${id}`,{});
+      setParts(my_parts.filter(part => part.id !== id));
+    } catch (error) {
+      alert('Erro ao excluir');      
     }
   }
 
@@ -54,7 +64,8 @@ export default function Parts(){
                     onClick={() => updatePart(part.id)}>Editar</button>
 
                     <button data-testid="mybtn2" type="button"
-                    className="btn btn-outline-danger">Excluir</button>
+                    className="btn btn-outline-danger" style={{margin: '2px'}}
+                    onClick={() => deletePart(part.id)}>Excluir</button>
 
                   </td>
               </tr>
